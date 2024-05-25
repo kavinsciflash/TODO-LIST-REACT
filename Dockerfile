@@ -20,6 +20,6 @@ FROM nginx:latest
 WORKDIR /usr/share/nginx/html
 RUN rm -rf *
 COPY --from=build /src/build .
-EXPOSE 80
+EXPOSE 3000
 ENTRYPOINT [ "nginx", "-g", "daemon off;" ]
 
