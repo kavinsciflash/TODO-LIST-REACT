@@ -12,14 +12,20 @@ ENV REACT_APP_SERVER_BASE_URI = $REACT_APP_SERVER_BASE_URI
 WORKDIR /src
 COPY package.json package-lock.json ./
 RUN npm install
+RUN npm install --legacy-peer-deps
 COPY . .
 RUN npm run build
 
 # serve to nginx
-FROM nginx:latest
+FROM nginx:alpine
 WORKDIR /usr/share/nginx/html
 RUN rm -rf *
 COPY --from=build /src/build .
-EXPOSE 3000
+COPY nginx.conf /etc/nginx/conf.d/nginx.conf
+EXPOSE 80
 ENTRYPOINT [ "nginx", "-g", "daemon off;" ]
+
+
+
+
 
