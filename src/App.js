@@ -12,7 +12,7 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('/get-todo');
+        const response = await axios.get('/api/get-todo');
         setListItem(response.data);
       } catch (error) {
         console.log(error);
@@ -24,10 +24,10 @@ function App() {
   const handleAdd = async () => {
     if (!input) return; // Do not proceed if input is empty
     try {
-      await axios.post('/create-todo', { todos: input });
+      await axios.post('/api/create-todo', { todos: input });
       setInput('');
       // Fetch updated list after adding
-      const response = await axios.get('/get-todo');
+      const response = await axios.get('/api/get-todo');
       setListItem(response.data);
     } catch (error) {
       console.log(error);
@@ -37,11 +37,11 @@ function App() {
   const handleUpdate = async () => {
     if (!input) return; // Do not proceed if input is empty
     try {
-      await axios.put(`/update-todo/${id}`, { todos: input });
+      await axios.put(`/api/update-todo/${id}`, { todos: input });
       setInput('');
       setMode('add');
       // Fetch updated list after updating
-      const response = await axios.get('/get-todo');
+      const response = await axios.get('/api/get-todo');
       setListItem(response.data);
     } catch (error) {
       console.log(error);
