@@ -17,7 +17,7 @@ jobs:
       - name: Login to docker hub
         run: sudo docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
       - name: Build Docker Image
-        run: sudo docker build -t kavinprasanth/reactjs .
+        run: sudo docker build -t kavinprasanth/reactjs --build-arg REACT_APP_NODE_ENV='production' --build-arg REACT_APP_SERVER_BASE_URI=${{ secrets.REACT_APP_SERVER_BASE_URI}} .
       - name: Publish Image to docker hub
         run: sudo docker push kavinprasanth/reactjs:latest
         
