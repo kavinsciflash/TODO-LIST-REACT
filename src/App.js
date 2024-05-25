@@ -34,11 +34,26 @@ function App() {
   }
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_SERVER_BASE_URI}/get-todo`).then(({ data }) => {
-      setListItem(data)
-    }).catch((error) => {
-      console.log(error)
-    })
+
+    // Make a GET request to fetch data
+    fetch(`${process.env.REACT_APP_SERVER_BASE_URI}/get-todo`)
+      .then(response => {
+        // Check if response is successful
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        // Parse the JSON response
+        return response.json();
+      })
+      .then(data => {
+        // Handle the data
+        setListItem(data)
+      })
+      .catch(error => {
+        // Handle errors
+        console.error('There was a problem with the fetch operation:', error);
+      });
+
   }, [])
 
 
