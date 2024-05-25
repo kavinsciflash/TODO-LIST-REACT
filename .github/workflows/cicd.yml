@@ -1,0 +1,33 @@
+# Author: kavinprasanth
+name: Deploy react application
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Login to docker hub
+        run: sudo docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+      - name: Build Docker Image
+        run: sudo docker build -t kavinprasanth/reactjs --build-arg REACT_APP_NODE_ENV='production' --build-arg REACT_APP_SERVER_BASE_URI=${{ secrets.REACT_APP_SERVER_BASE_URI}}.
+      - name: Publish Image to docker hub
+        run: sudo docker push kavinprasanth/reactjs:latest
+        
+  deploy:
+    needs: build
+    runs-on: self-hosted
+    steps:
+      - name: Pull Image From the docker hub
+        run: sudo docker pull kavinprasanth/reactjs:latest
+      - name: Delete old Container
+        run: sudo docker rm -f reactapp
+      - name: Run Docker Container
+        run: sudo docker run -d  -p 80:3000 --name reactapp -e  MONGO_PASSWORD=${{ secrets.MONGO_PASSWORD }} kavinprasanth/reactjs
