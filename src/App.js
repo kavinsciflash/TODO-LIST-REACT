@@ -11,12 +11,12 @@ function App() {
   const [mode, setMode] = useState("add");
   const [id, setId] = useState("");
 
-  let BASE_URI = process.env.REACT_APP_NODE_ENV == "development" ? process.env.REACT_APP_LOCAL_BASE_URI : process.env.REACT_APP_SERVER_BASE_URI;
+  axios.defaults.baseURL = process.env.REACT_APP_NODE_ENV == "development" ? process.env.REACT_APP_LOCAL_BASE_URI : process.env.REACT_APP_SERVER_BASE_URI;
 
   const handleList = async () => {
     if (input != '' && input != null && input != undefined && mode == "add") {
       const Input = { todos: input }
-      axios.post(`${BASE_URI}/create-todo`, Input).then((data) => {
+      axios.post(`/create-todo`, Input).then((data) => {
         console.log(data)
       }).catch((error) => {
         console.log(error)
@@ -24,7 +24,7 @@ function App() {
     }
     else if (mode == "edit") {
       const Input = { todos: input }
-      axios.put(`${BASE_URI}/update-todo/${id}`, Input).then(({ data }) => {
+      axios.put(`/update-todo/${id}`, Input).then(({ data }) => {
         console.log(data)
         setMode("add")
         setInput("")
@@ -35,7 +35,7 @@ function App() {
   }
 
   useEffect(() => {
-    axios.get(`${BASE_URI}/get-todo`).then(({ data }) => {
+    axios.get(`/get-todo`).then(({ data }) => {
       setListItem(data)
     }).catch((error) => {
       console.log(error)
