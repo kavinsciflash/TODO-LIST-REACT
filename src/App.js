@@ -11,7 +11,7 @@ function App() {
   const [mode, setMode] = useState("add");
   const [id, setId] = useState("");
 
-  let BASE_URI = process.env.REACT_APP_NODE_ENV == "development" ? process.env.REACT_APP_LOCAL_BASE_URI : process.env.REACT_APP_SERVER_BASE_URI;
+  let BASE_URI = process.env.REACT_APP_SERVER_BASE_URI;
 
 
   const handleList = async () => {
