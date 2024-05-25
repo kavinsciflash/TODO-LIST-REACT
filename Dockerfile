@@ -6,7 +6,6 @@ ARG REACT_APP_SERVER_BASE_URI
 
 # set default defult values for environment variable
 ENV REACT_APP_NODE_ENV = $REACT_APP_NODE_ENV
-ENV REACT_APP_SERVER_BASE_URI = $REACT_APP_SERVER_BASE_URI
 
 # build app
 WORKDIR /src

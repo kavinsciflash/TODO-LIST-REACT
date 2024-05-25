@@ -11,11 +11,12 @@ function App() {
   const [mode, setMode] = useState("add");
   const [id, setId] = useState("");
 
+  let BASE_URI = process.env.REACT_APP_NODE_ENV == "development" ? process.env.REACT_APP_LOCAL_BASE_URI : process.env.REACT_APP_SERVER_BASE_URI;
 
   const handleList = async () => {
     if (input != '' && input != null && input != undefined && mode == "add") {
       const Input = { todos: input }
-      axios.post(`${process.env.REACT_APP_SERVER_BASE_URI}/create-todo`, Input).then((data) => {
+      axios.post(`${BASE_URI}/create-todo`, Input).then((data) => {
         console.log(data)
       }).catch((error) => {
         console.log(error)
@@ -23,7 +24,7 @@ function App() {
     }
     else if (mode == "edit") {
       const Input = { todos: input }
-      axios.put(`${process.env.REACT_APP_SERVER_BASE_URI}/update-todo/${id}`, Input).then(({ data }) => {
+      axios.put(`${BASE_URI}/update-todo/${id}`, Input).then(({ data }) => {
         console.log(data)
         setMode("add")
         setInput("")
@@ -34,26 +35,11 @@ function App() {
   }
 
   useEffect(() => {
-
-    // Make a GET request to fetch data
-    fetch(`${process.env.REACT_APP_SERVER_BASE_URI}/get-todo`)
-      .then(response => {
-        // Check if response is successful
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        // Parse the JSON response
-        return response.json();
-      })
-      .then(data => {
-        // Handle the data
-        setListItem(data)
-      })
-      .catch(error => {
-        // Handle errors
-        console.error('There was a problem with the fetch operation:', error);
-      });
-
+    axios.get(`${BASE_URI}/get-todo`).then(({ data }) => {
+      setListItem(data)
+    }).catch((error) => {
+      console.log(error)
+    })
   }, [])
 
 
