@@ -11,17 +11,17 @@ function App() {
   const [mode, setMode] = useState("add");
   const [id, setId] = useState("");
 
-  const createToDO = process.env.REACT_APP_API_BASE_URL + 'create-todo';
-  
-  const updateToDO = process.env.REACT_APP_API_BASE_URL + `update-todo/${id}`;
-  
-  const getToDO = process.env.REACT_APP_API_BASE_URL + 'get-todo';
+  const createToDO = `${process.env.REACT_APP_SERVER_BASE_URI}/create-todo`;
+
+  const updateToDO = `${process.env.REACT_APP_SERVER_BASE_URI}/update-todo/${id}`;
+
+  const getToDO = `${process.env.REACT_APP_SERVER_BASE_URI}/get-todo`;
 
 
   const handleList = async () => {
     if (input != '' && input != null && input != undefined && mode == "add") {
       const Input = { todos: input }
-      axios.post(createToDO , Input).then((data) => {
+      axios.post(createToDO, Input).then((data) => {
         console.log(data)
       }).catch((error) => {
         console.log(error)
