@@ -11,11 +11,11 @@ function App() {
   const [mode, setMode] = useState("add");
   const [id, setId] = useState("");
 
-  const createToDO = process.env.REACT_APP_API_BASE_URL + '/create-todo';
+  const createToDO = process.env.REACT_APP_API_BASE_URL + 'create-todo';
   
-  const updateToDO = process.env.REACT_APP_API_BASE_URL + `/update-todo/${id}`;
+  const updateToDO = process.env.REACT_APP_API_BASE_URL + `update-todo/${id}`;
   
-  const getToDO = process.env.REACT_APP_API_BASE_URL + '/get-todo';
+  const getToDO = process.env.REACT_APP_API_BASE_URL + 'get-todo';
 
 
   const handleList = async () => {
