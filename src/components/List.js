@@ -4,7 +4,7 @@ import axios from 'axios'
 
 function List(props) {
 
-  const { listItem, setInput, setMode, setId, handleItem } = props;
+  const { listItem, setInput, setMode, setId } = props;
 
   const handleEdit = (id, item) => {
     setInput(item)
@@ -29,7 +29,7 @@ function List(props) {
       const response = await axiosInstance.get('/api/get-todo');
       console.log(response, handleItem);
 
-      handleItem(response.data);
+      props.handleItem(response.data);
     } catch (error) {
       console.log(error);
     }
