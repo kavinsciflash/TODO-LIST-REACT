@@ -24,7 +24,7 @@ function List(props) {
   const handleDelete = async (id) => {
     if (!id) return; // Do not proceed if input is empty
     try {
-      await axiosInstance.put(`/api/delete-todo/${id}`);
+      await axiosInstance.delete(`/api/delete-todo/${id}`);
       // Fetch updated list after updating
       const response = await axiosInstance.get('/api/get-todo');
       setListItem(response);
