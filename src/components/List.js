@@ -16,7 +16,7 @@ function List(props) {
 
 
   const handleDelete = (id) => {
-    axios.delete(BASE_URI + `/delete-todo/${id}`).then(({ data }) => {
+    axios.delete(BASE_URI + `delete-todo/${id}`).then(({ data }) => {
       console.log(data)
     }).catch((error) => {
       console.log(error)
