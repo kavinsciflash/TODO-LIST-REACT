@@ -4,9 +4,7 @@ import axios from 'axios'
 
 function List(props) {
 
-  let BASE_URI = process.env.REACT_APP_NODE_ENV == "development" ? process.env.REACT_APP_LOCAL_BASE_URI : process.env.REACT_APP_SERVER_BASE_URI;
-
-  const { listItem, setInput, setMode, setId } = props;
+  const { listItem, setInput, setMode, setId, setListItem } = props;
 
   const handleEdit = (id, item) => {
     setInput(item)
@@ -14,14 +12,26 @@ function List(props) {
     setMode("edit")
   }
 
+  // Create an Axios instance with default headers for CORS
+  const axiosInstance = axios.create({
+    baseURL: 'http://34.229.14.151:5000',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }
+  });
 
-  const handleDelete = (id) => {
-    axios.delete(BASE_URI + `delete-todo/${id}`).then(({ data }) => {
-      console.log(data)
-    }).catch((error) => {
-      console.log(error)
-    })
-  }
+  const handleDelete = async (id) => {
+    if (!id) return; // Do not proceed if input is empty
+    try {
+      await axiosInstance.put(`/api/delete-todo/${id}`);
+      // Fetch updated list after updating
+      const response = await axiosInstance.get('/api/get-todo');
+      setListItem(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
