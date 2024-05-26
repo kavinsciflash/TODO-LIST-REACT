@@ -58,6 +58,10 @@ const axiosInstance = axios.create({
     }
   };
 
+  const handleItem = (data) => {
+    setListItem(data)
+  }
+
   return (
     <main className="todo_list">
       <div className="main_holder">
@@ -68,7 +72,7 @@ const axiosInstance = axios.create({
         </div>
         <div className='list_holder'>
           <h2>List</h2>
-          <List listItem={listItem} setInput={setInput} setMode={setMode} setId={setId} />
+          <List listItem={listItem} setInput={setInput} setMode={setMode} setId={setId} setListItem={handleItem}/>
         </div>
       </div>
     </main>

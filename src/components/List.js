@@ -4,7 +4,7 @@ import axios from 'axios'
 
 function List(props) {
 
-  const { listItem, setInput, setMode, setId, setListItem } = props;
+  const { listItem, setInput, setMode, setId, handleItem } = props;
 
   const handleEdit = (id, item) => {
     setInput(item)
@@ -27,9 +27,9 @@ function List(props) {
       await axiosInstance.delete(`/api/delete-todo/${id}`);
       // Fetch updated list after updating
       const response = await axiosInstance.get('/api/get-todo');
-      console.log(response, setListItem);
+      console.log(response, handleItem);
 
-      setListItem(response);
+      handleItem(response.data);
     } catch (error) {
       console.log(error);
     }
