@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 
 
 function List(props) {
 
   const { listItem, setInput, setMode, setId, setListItem } = props;
+
+  const [deleteItem, setDeleteItem] = useState(listItem);
 
   const handleEdit = (id, item) => {
     setInput(item)
@@ -27,7 +29,8 @@ function List(props) {
       await axiosInstance.delete(`/api/delete-todo/${id}`);
       // Fetch updated list after updating
       const response = await axiosInstance.get('/api/get-todo');
-      setListItem(response);
+      console.log(response);
+      setDeleteItem(response);
     } catch (error) {
       console.log(error);
     }
@@ -36,8 +39,8 @@ function List(props) {
   return (
     <>
       {
-        listItem.length &&
-        listItem.map((item, index) => {
+        deleteItem.length &&
+        deleteItem.map((item, index) => {
           return <ul className='list_item' key={item._id}>
             <h3>{item.todos}</h3>
             <div className='icons'>
