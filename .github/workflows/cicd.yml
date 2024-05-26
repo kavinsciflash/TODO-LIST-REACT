@@ -30,4 +30,4 @@ jobs:
       - name: Delete old Container
         run: sudo docker rm -f reactapp
       - name: Run Docker Container
-        run: sudo docker run -d  -p 80:80 --name reactapp -e  MONGO_PASSWORD=${{ secrets.MONGO_PASSWORD }} kavinprasanth/reactjs
+        run: sudo docker run -d  -p 5000:80 --name reactapp -e  MONGO_PASSWORD=${{ secrets.MONGO_PASSWORD }} kavinprasanth/reactjs
