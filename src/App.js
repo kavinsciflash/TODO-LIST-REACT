@@ -12,6 +12,7 @@ function App() {
 
   // Create an Axios instance with default headers for CORS
 const axiosInstance = axios.create({
+  baseURL: 'http://54.158.81.83:5000/api',
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json'
