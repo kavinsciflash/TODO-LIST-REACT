@@ -27,7 +27,7 @@ function List(props) {
       await axiosInstance.delete(`/api/delete-todo/${id}`);
       // Fetch updated list after updating
       const response = await axiosInstance.get('/api/get-todo');
-      console.log(response, handleItem);
+      console.log(response,  props.handleItem);
 
       props.handleItem(response.data);
     } catch (error) {
