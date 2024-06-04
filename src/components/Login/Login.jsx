@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 
 
 
 const Login = () => {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
 
@@ -26,7 +27,7 @@ const Login = () => {
           <label for="chk" aria-hidden="true">Login</label>
           <input type="email" name="email" placeholder="Email" required="" />
           <input type="password" name="pswd" placeholder="Password" required="" />
-          <button>Login</button>
+          <button onClick={() => navigate('/todo')}>Login</button>
         </form>
       </div>
     </div>
