@@ -9,15 +9,13 @@ import Main from "./components/main";
 function App() {
   const { theme } = useContext(ThemeContext);
   return (
-    <div className={style.app} data-theme={theme}>
-      <div className={style.wrapper}>
+    <div data-theme={theme}>
         <BrowserRouter>
           <Routes>
             <Route path="/" index element={<Login />} />
             <Route path="/todo" index element={<Main />} />
           </Routes>
         </BrowserRouter>
-      </div>
     </div>
   );
 }

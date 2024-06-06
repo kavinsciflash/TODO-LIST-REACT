@@ -1,13 +1,17 @@
 import React from 'react'
 import { Header, TodoInput, TodoList } from "../components";
-
+import style from '../app.module.css'
 
 function main() {
     return (
         <>
-            <Header />
-            <TodoInput />
-            <TodoList />
+            <div className={style.app}>
+                <div className={style.wrapper}>
+                    <Header />
+                    <TodoInput />
+                    <TodoList />
+                </div>
+            </div>
         </>
     )
 }
